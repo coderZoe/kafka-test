@@ -1,0 +1,25 @@
+server:
+  port: 8083
+spring:
+  kafka:
+    consumer:
+      # kafka服务器IP端口
+      bootstrap-servers: 192.168.31.187:9092
+      # 消费组id 相同消费组的消费者维护同一个offset 不同消费组可以消费相同数据
+      group-id: consumer-1
+      # 开启自动提交
+      enable-auto-commit: true
+      # 自动提交的频率
+      auto-commit-interval: 1000
+      # 如果kafka服务器中没有当前消费者的偏移量 则从何时开始消费
+      auto-offset-reset: latest
+      # 最少消费数据 1MB
+      fetch-min-size: 1048576
+      # 若当前kafka中没有fetch-min-size大小数据且等待时常超过fetch-max-wait则直接消费
+      fetch-max-wait: 1000
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      max-poll-records: 10000
+es:
+  host: 192.168.31.187
+  port: 9200
